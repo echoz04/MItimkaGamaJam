@@ -14,8 +14,19 @@ public class SpriteColorComponent : MonoBehaviour
         Color.RGBToHSV(BaseColor, out h, out s, out v);
     }
 
-    void Update()
+    private void OnValidate()
     {
-        spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.HSVToRGB(h + ScenePalleteController.ShiftHue, s, v), Time.deltaTime);
+        ChangeColor();
+    }
+
+    private void Update()
+    {
+        ChangeColor();
+    }
+
+    private void ChangeColor()
+    {
+        if (spriteRenderer != null)
+            spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.HSVToRGB(h + ScenePalleteController.ShiftHue, s, v), Time.deltaTime);
     }
 }

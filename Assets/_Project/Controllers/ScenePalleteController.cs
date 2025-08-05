@@ -19,11 +19,11 @@ public class ScenePalleteController : MonoBehaviour
     int pallete_cursor = 0;
 
     float changeColorTimeLeft = 0.0f;
-    float changeColorRate = 10.0f;
+    float changeColorRate = 1.0f;
 
     void Start()
     {
-        
+
     }
 
     void FixedUpdate()

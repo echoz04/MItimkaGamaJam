@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _gunTransform: {fileID: 8605045752271187377}
-  _moveSpeed: 1.5
+  _moveSpeed: 2.25
   _rotateSpeed: 50
   _gunRotateSpeed: 50
   _gunRotateOffSet: 180

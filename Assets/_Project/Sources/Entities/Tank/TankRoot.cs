@@ -9,6 +9,8 @@ public class TankRoot : MonoBehaviour, ICharacter
     public Transform Transform => transform;
     public bool IsMoving => _currentMoveInput > 0 || _rotateDirection > 0;
 
+    private HealthComponent healthComponent;
+
     [SerializeField] private Transform _gunTransform;
 
     [SerializeField] private float _moveSpeed = 5f;
@@ -50,6 +52,27 @@ public class TankRoot : MonoBehaviour, ICharacter
 
         _input.Movement.Rotate.performed += _onRotatePerformed;
         _input.Movement.Rotate.canceled += _onRotateCanceled;
+    }
+
+    private void Start()
+    {
+        healthComponent = Transform.GetComponent<HealthComponent>();
+
+        healthComponent.OnHealthEnded += () =>
+        {
+            // OnDestroyed?.Invoke();
+            // isDestroyed = true;
+            Debug.Log("Tank destroyed");
+            Destroy(this);
+        };
+
+        healthComponent.OnHealthChanged += (delta) =>
+        {
+            if (delta > 0)
+            {
+                
+            }
+        };
     }
 
     private void OnDestroy()

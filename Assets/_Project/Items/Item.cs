@@ -9,9 +9,10 @@ public class Item : MonoBehaviour
 
     const float applyDistanceThreshold = 0.5f;
 
-    void Start() {
+    public virtual void Start() {
         // TODO
-        // PickUpperTransform = Player.instance.GetComponent<Transform>();
+        // PickUpperTransform = TankRoot.Instance.GetComponent<Transform>();
+        PickUpperTransform = EnemiesController.EnemiesTargetTransform;
         selfTransform = GetComponent<Transform>();
     }
 

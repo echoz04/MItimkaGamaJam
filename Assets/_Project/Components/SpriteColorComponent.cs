@@ -27,6 +27,6 @@ public class SpriteColorComponent : MonoBehaviour
     private void ChangeColor()
     {
         if (spriteRenderer != null)
-            spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.HSVToRGB(h + ScenePalleteController.ShiftHue, s, v), Time.deltaTime);
+            spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.HSVToRGB(Mathf.Repeat(h + ScenePalleteController.ShiftHue, 1.0f), s, v), Time.deltaTime);
     }
 }

@@ -1,22 +1,27 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class TankRoot : MonoBehaviour, ICharacter
 {
+    public static ICharacter Instance { get; private set; }
+
     public Transform Transform => transform;
 
     [SerializeField] private Transform _gunTransform;
 
-    [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _rotateSpeed;
-    [SerializeField] private float _gunRotateSpeed;
+    [SerializeField] private float _moveSpeed = 5f;
+    [SerializeField] private float _rotateSpeed = 100f;
+    [SerializeField] private float _gunRotateSpeed = 200f;
     [SerializeField] private float _gunRotateOffSet = 180f;
+    [SerializeField] private float _accelerationTime = 0.2f;
 
     private TankInput _input;
     private Camera _camera;
-    private float _moveDirection;
+    private float _targetMoveInput;
+    private float _currentMoveInput;
+    private float _moveVelocityRef;
+
     private float _rotateDirection;
 
     private Action<InputAction.CallbackContext> _onMovePerformed;
@@ -26,15 +31,18 @@ public class TankRoot : MonoBehaviour, ICharacter
 
     private void Start()
     {
+        Instance = this;
+
         _input = new TankInput();
         _input.Enable();
 
         _camera = Camera.main;
 
-        _onMovePerformed = ctx => _moveDirection = ctx.ReadValue<float>();
-        _onMoveCanceled = ctx => _moveDirection = 0;
+        _onMovePerformed = ctx => _targetMoveInput = ctx.ReadValue<float>();
+        _onMoveCanceled = ctx => _targetMoveInput = 0f;
+
         _onRotatePerformed = ctx => _rotateDirection = ctx.ReadValue<float>();
-        _onRotateCanceled = ctx => _rotateDirection = 0;
+        _onRotateCanceled = ctx => _rotateDirection = 0f;
 
         _input.Movement.Move.performed += _onMovePerformed;
         _input.Movement.Move.canceled += _onMoveCanceled;
@@ -53,33 +61,30 @@ public class TankRoot : MonoBehaviour, ICharacter
 
     private void Update()
     {
+        UpdateMovementInput();
         Move();
         Rotate();
-        Rotategun();
+        RotateGun();
     }
 
-    public void UpgradeStats()
+    private void UpdateMovementInput()
     {
-        _moveSpeed *= 2;
-        _rotateSpeed *= 2;
-        _gunRotateSpeed *= 2;
+        _currentMoveInput = Mathf.SmoothDamp(_currentMoveInput, _targetMoveInput, ref _moveVelocityRef, _accelerationTime);
     }
 
     private void Move()
     {
-        Vector3 movement = -transform.right * _moveDirection * _moveSpeed * Time.deltaTime;
-
+        Vector3 movement = -transform.right * _currentMoveInput * _moveSpeed * Time.deltaTime;
         transform.Translate(movement, Space.World);
     }
 
     private void Rotate()
     {
         float rotationAmount = -_rotateDirection * _rotateSpeed * Time.deltaTime;
-
         transform.Rotate(0f, 0f, rotationAmount);
     }
 
-    private void Rotategun()
+    private void RotateGun()
     {
         Vector3 mousePosition = Mouse.current.position.ReadValue();
         Vector3 mouseWorldPosition = _camera.ScreenToWorldPoint(mousePosition);
@@ -88,9 +93,19 @@ public class TankRoot : MonoBehaviour, ICharacter
         Vector3 direction = mouseWorldPosition - _gunTransform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        float currentAngle = _gunTransform.eulerAngles.z;
-        float smoothAngle = Mathf.MoveTowardsAngle(currentAngle, angle + _gunRotateOffSet, Time.deltaTime * _gunRotateSpeed);
+        float tankRotationZ = transform.eulerAngles.z;
+        float targetAngle = angle + _gunRotateOffSet - tankRotationZ;
 
-        _gunTransform.rotation = Quaternion.Euler(0f, 0f, smoothAngle);
+        float currentGunAngle = _gunTransform.localEulerAngles.z;
+        float smoothAngle = Mathf.MoveTowardsAngle(currentGunAngle, targetAngle, Time.deltaTime * _gunRotateSpeed);
+
+        _gunTransform.localRotation = Quaternion.Euler(0f, 0f, smoothAngle);
+    }
+
+    public void UpgradeStats()
+    {
+        _moveSpeed *= 2;
+        _rotateSpeed *= 2;
+        _gunRotateSpeed *= 2;
     }
 }

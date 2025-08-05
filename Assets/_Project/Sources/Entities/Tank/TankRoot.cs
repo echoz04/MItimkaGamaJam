@@ -7,6 +7,7 @@ public class TankRoot : MonoBehaviour, ICharacter
     public static ICharacter Instance { get; private set; }
 
     public Transform Transform => transform;
+    public bool IsMoving => _currentMoveInput > 0 || _rotateDirection > 0;
 
     [SerializeField] private Transform _gunTransform;
 

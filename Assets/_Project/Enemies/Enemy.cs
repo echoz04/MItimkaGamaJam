@@ -3,12 +3,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _hitParticle;
+    [SerializeField] private ParticleSystem _deadParticle;
+
     public float MovementSpeed = 10.0f;
     public float MovementAcceleration = 10.0f;
 
     private Transform targetTransform;
 
-    private Rigidbody2D rigidbody; 
+    private Rigidbody2D rigidbody;
     private Transform selfTransform;
 
     private HealthComponent healthComponent;
@@ -26,13 +29,18 @@ public class Enemy : MonoBehaviour
         healthComponent = GetComponent<HealthComponent>();
         healthComponent.OnHealthEnded += () =>
         {
+            AudioPlayer.Instance.PlayEnemyDeadSound();
+            _deadParticle.Play();
             OnDestroyed?.Invoke();
             isDestroyed = true;
-            // Destroy(this, 2.0f);
+            Destroy(gameObject, .35f);
         };
 
         healthComponent.OnHealthChanged += (delta) =>
         {
+            AudioPlayer.Instance.PlayEnemyHitSound();
+            _hitParticle.Play();
+
             if (delta > 0)
             {
                 rigidbody.linearVelocity = new Vector2(0, 0);

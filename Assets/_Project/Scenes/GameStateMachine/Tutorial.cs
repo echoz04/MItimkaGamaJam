@@ -20,8 +20,10 @@ public class Tutorial : State
             // TODO track that player moving
             bool isPlayerMoving = true;
 
-            if (isPlayerMoving)
+            if (TankRoot.Instance.IsMoving)
             {
+                Debug.Log("Is Moving");
+
                 moving_goal_time_left -= Time.deltaTime;
                 // TODO update something in gui
             }
@@ -31,7 +33,8 @@ public class Tutorial : State
 
         }
 
-        else {
+        else
+        {
             ChangeState(stateMachine.States["Waves"], StateMachine.empty_dict);
         }
     }

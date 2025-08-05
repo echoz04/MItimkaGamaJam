@@ -8,5 +8,7 @@ public class EntryPoint : MonoBehaviour
     private void Start()
     {
         _abilityChoosePanel.Initialize();
+
+        AbilitiesBuilder.Instance.BuildGunShoot();
     }
 }

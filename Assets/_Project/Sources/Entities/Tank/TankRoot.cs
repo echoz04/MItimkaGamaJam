@@ -70,7 +70,7 @@ public class TankRoot : MonoBehaviour, ICharacter
         {
             if (delta > 0)
             {
-                
+
             }
         };
     }

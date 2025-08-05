@@ -3,15 +3,14 @@ using System.Collections.Generic;
 
 public class StateMachine : MonoBehaviour
 {
-
     private State state;
     public Dictionary<string, State> States;
 
-    public static Dictionary<string, object> empty_dict = new Dictionary<string, object>(){};
+    public static Dictionary<string, object> empty_dict = new Dictionary<string, object>() { };
 
     public virtual void Start()
     {
-        States = new Dictionary<string, State>(){};
+        States = new Dictionary<string, State>() { };
         foreach (var state in GetComponentsInChildren<State>())
         {
             States.Add(state.name, state);
@@ -26,7 +25,7 @@ public class StateMachine : MonoBehaviour
         }
     }
 
-    
+
     void FixedUpdate()
     {
         if (state != null)

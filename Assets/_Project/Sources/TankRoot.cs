@@ -1,9 +1,12 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TankRoot : MonoBehaviour
+public class TankRoot : MonoBehaviour, ICharacter
 {
+    public Transform Transform { get; private set; }
+
     [SerializeField] private Transform _turretTransform;
 
     [SerializeField] private float _moveSpeed;
@@ -79,7 +82,7 @@ public class TankRoot : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
         float currentAngle = _turretTransform.eulerAngles.z;
-        float smoothAngle = Mathf.LerpAngle(currentAngle, angle + _turretRotateOffSet, Time.deltaTime * _turretRotateSpeed);
+        float smoothAngle = Mathf.MoveTowardsAngle(currentAngle, angle + _turretRotateOffSet, Time.deltaTime * _turretRotateSpeed);
 
         _turretTransform.rotation = Quaternion.Euler(0f, 0f, smoothAngle);
     }

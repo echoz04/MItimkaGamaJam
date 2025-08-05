@@ -30,14 +30,14 @@ public class Waves : State
         if (nextWaveTimeLeft <= 0)
         {
             nextWaveTimeLeft = waveSpawnRate;
-            int enemiesCount = 6;
+            int enemiesCount = 2 * (WavesPassed > 2 ? (int)((float)WavesPassed / 2.0f) : 1);
             if (WavesPassed % 5 == 0)
             {
-                SpawnWave(WaveType.BASIC, enemiesCount);
+                SpawnWave(WaveType.CIRCLE, enemiesCount * 3);
             }
             else
             {
-                SpawnWave(WaveType.CIRCLE, enemiesCount * 3);
+                SpawnWave(WaveType.BASIC, enemiesCount);
             }
             WavesPassed += 1;
         }
@@ -61,7 +61,7 @@ public class Waves : State
 
     public Vector2 GetRandomSpawnPosition()
     {
-        return Random.insideUnitCircle * 60.0f;
+        return Random.insideUnitCircle * 20.0f;
     }
 
     public Vector2 GetCircleDirection(int currentEnemy, int enemiesCount)

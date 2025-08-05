@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -10,16 +11,46 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D rigidbody; 
     private Transform selfTransform;
 
+    private HealthComponent healthComponent;
+
+    public event Action OnDestroyed;
+
+    bool isDestroyed = false;
+
     void Start()
     {
         targetTransform = EnemiesController.EnemiesTargetTransform;
         selfTransform = GetComponent<Transform>();
         rigidbody = GetComponent<Rigidbody2D>();
+
+        healthComponent = GetComponent<HealthComponent>();
+        healthComponent.OnHealthEnded += () =>
+        {
+            OnDestroyed?.Invoke();
+            isDestroyed = true;
+            // Destroy(this, 2.0f);
+        };
+
+        healthComponent.OnHealthChanged += (delta) =>
+        {
+            if (delta > 0)
+            {
+                rigidbody.linearVelocity = new Vector2(0, 0);
+                rigidbody.angularVelocity = 0.0f;
+            }
+        };
     }
 
     void FixedUpdate()
     {
         Vector2 directionToTarget = (Vector2)((Vector2)targetTransform.position - (Vector2)selfTransform.position).normalized;
-        rigidbody.linearVelocity = Vector2.Lerp(rigidbody.linearVelocity, directionToTarget * MovementSpeed, Time.deltaTime * MovementAcceleration);
+        Vector2 targetVelocity = directionToTarget * MovementSpeed;
+        if (isDestroyed)
+        {
+            targetVelocity = new Vector2();
+        }
+
+        rigidbody.angularVelocity = Mathf.Lerp(rigidbody.angularVelocity, 0.0f, Time.deltaTime * MovementAcceleration * .5f);
+        rigidbody.linearVelocity = Vector2.Lerp(rigidbody.linearVelocity, targetVelocity, Time.deltaTime * MovementAcceleration);
     }
 }

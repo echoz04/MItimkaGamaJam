@@ -37,11 +37,6 @@ public class AbilitiesBuilder : MonoBehaviour
     [SerializeField] private GameObject[] _extraGuns;
     [SerializeField] private Transform[] _shotPoints;
     [SerializeField] private float _extraShootCooldown = 1f;
-    [Space]
-
-    [Header("Character Upgrade")]
-    [SerializeField] private TankRoot _tankRoot;
-    [Space]
 
     [Header("Turret Spawner")]
     [SerializeField] private TurretRoot _turretPrefab;
@@ -69,11 +64,11 @@ public class AbilitiesBuilder : MonoBehaviour
 
     public void BuildCharacterUpgrade()
     {
-        _invoker.Register(new CharacterUpgradeAbility(_tankRoot));
+        _invoker.Register(new CharacterUpgradeAbility(TankRoot.Instance));
     }
 
     public void BuildTurretSpawner()
     {
-        _invoker.Register(new TurretSpawnerAbility(_turretPrefab, _tankRoot, _spawnTurretsCooldown));
+        _invoker.Register(new TurretSpawnerAbility(_turretPrefab, TankRoot.Instance, _spawnTurretsCooldown));
     }
 }

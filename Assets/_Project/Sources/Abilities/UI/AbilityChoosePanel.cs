@@ -1,0 +1,60 @@
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
+using UnityEngine;
+
+public class AbilityChoosePanel : MonoBehaviour
+{
+    public static AbilityChoosePanel Instance { get; private set; }
+
+    [SerializeField] private TextMeshProUGUI[] _abilitiesDisplayTexts;
+
+    private List<AbilityInfo> _abilitiesInfo;
+
+    private List<AbilityInfo> _currentAbilitiesInfo;
+
+    public void Initialize()
+    {
+        Instance = this;
+
+        _abilitiesInfo = new List<AbilityInfo>()
+        {
+            new AbilityInfo { Title = "Летающие шипы", BuildAction = AbilitiesBuilder.Instance.BuildFlyingSpikes },
+            new AbilityInfo { Title = "Двойная пушка", BuildAction = AbilitiesBuilder.Instance.BuildExtraGuns },
+            new AbilityInfo { Title = "Улучшение параметров", BuildAction = AbilitiesBuilder.Instance.BuildCharacterUpgrade },
+            new AbilityInfo { Title = "Пушка", BuildAction = AbilitiesBuilder.Instance.BuildGunShoot },
+            new AbilityInfo { Title = "Туррелы", BuildAction = AbilitiesBuilder.Instance.BuildTurretSpawner },
+        };
+
+        gameObject.SetActive(false);
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+
+        _currentAbilitiesInfo = _abilitiesInfo
+            .OrderBy(x => Random.value)
+            .Take(3)
+            .ToList();
+
+        for (int i = 0; i < _currentAbilitiesInfo.Count && i < _abilitiesDisplayTexts.Length; i++)
+            _abilitiesDisplayTexts[i].text = _currentAbilitiesInfo[i].Title;
+    }
+
+    public void ChooseAbility(int index)
+    {
+        if (index < 0 || index >= _currentAbilitiesInfo.Count) return;
+
+        _currentAbilitiesInfo[index].BuildAction?.Invoke();
+
+        gameObject.SetActive(false);
+    }
+}
+
+[System.Serializable]
+public class AbilityInfo
+{
+    public string Title;
+    public System.Action BuildAction;
+}

@@ -3,8 +3,12 @@ using UnityEngine;
 
 public class EntryPoint : MonoBehaviour
 {
+    [SerializeField] private AbilityChoosePanel _abilityChoosePanel;
+
     private void Start()
     {
-        AbilitiesBuilder.Instance.BuildGunShoot();
+        _abilityChoosePanel.Initialize();
+
+        AbilityChoosePanel.Instance.Show();
     }
 }

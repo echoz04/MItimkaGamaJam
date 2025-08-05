@@ -29,7 +29,7 @@ public class TankRoot : MonoBehaviour, ICharacter
     private Action<InputAction.CallbackContext> _onRotatePerformed;
     private Action<InputAction.CallbackContext> _onRotateCanceled;
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
 

@@ -1,16 +1,26 @@
 using UnityEngine;
 
-public class ExtraGunsAbility : MonoBehaviour
+public sealed class ExtraGunsAbility : BaseAbility
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private readonly GameObject[] _turrets;
+    private readonly Transform[] _shootPoints;
+    private readonly Bullet _bulletPrefab;
+
+    public ExtraGunsAbility(GameObject[] turrets, Transform[] shootPoints, Bullet bulletPrefab, float cooldown)
     {
-        
+        _turrets = turrets;
+        _shootPoints = shootPoints;
+        _bulletPrefab = bulletPrefab;
+
+        foreach (var turret in _turrets)
+            turret.SetActive(true);
+
+        SetCooldown(cooldown);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Execute()
     {
-        
+        for (int i = 0; i < _turrets.Length; i++)
+            GameObject.Instantiate(_bulletPrefab, _shootPoints[i].position, _turrets[i].transform.rotation);
     }
 }

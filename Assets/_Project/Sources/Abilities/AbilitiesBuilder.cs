@@ -21,27 +21,59 @@ public class AbilitiesBuilder : MonoBehaviour
     [SerializeField] private AbilitiesInvoker _invoker;
     [Space]
 
-    [SerializeField] private Transform _turretTransform;
+    [Header("GunShootAbility")]
+    [SerializeField] private Transform _gunTransform;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Bullet _bulletPrefab;
     [SerializeField] private float _shootCooldown = 1f;
     [Space]
 
+    [Header("FlyingSpikesAbility")]
     [SerializeField] private Transform _spikesParent;
     [SerializeField] private float _rotateSpeed;
+    [Space]
+
+    [Header("Extra Guns")]
+    [SerializeField] private GameObject[] _extraGuns;
+    [SerializeField] private Transform[] _shotPoints;
+    [SerializeField] private float _extraShootCooldown = 1f;
+    [Space]
+
+    [Header("Character Upgrade")]
+    [SerializeField] private TankRoot _tankRoot;
+    [Space]
+
+    [Header("Turret Spawner")]
+    [SerializeField] private TurretRoot _turretPrefab;
+    [SerializeField] private float _spawnTurretsCooldown;
 
     private void OnValidate()
     {
         _invoker ??= GetComponent<AbilitiesInvoker>();
     }
 
-    public void BuildTurretShoot()
+    public void BuildGunShoot()
     {
-        _invoker.Register(new TurretShootAbility(_turretTransform, _shootPoint, _bulletPrefab, _shootCooldown));
+        _invoker.Register(new GunShootAbility(_gunTransform, _shootPoint, _bulletPrefab, _shootCooldown));
     }
 
     public void BuildFlyingSpikes()
     {
         _invoker.Register(new FlyingSpikesAbility(_spikesParent, _rotateSpeed, 0f));
+    }
+
+    public void BuildExtraGuns()
+    {
+        _invoker.Register(new ExtraGunsAbility(_extraGuns, _shotPoints, _bulletPrefab, _extraShootCooldown));
+    }
+
+    public void BuildCharacterUpgrade()
+    {
+        _invoker.Register(new CharacterUpgradeAbility(_tankRoot));
+    }
+
+    public void BuildTurretSpawner()
+    {
+        _invoker.Register(new TurretSpawnerAbility(_turretPrefab, _tankRoot, _spawnTurretsCooldown));
     }
 }

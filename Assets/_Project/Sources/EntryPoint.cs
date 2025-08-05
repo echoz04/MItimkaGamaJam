@@ -5,7 +5,6 @@ public class EntryPoint : MonoBehaviour
 {
     private void Start()
     {
-        AbilitiesBuilder.Instance.BuildFlyingSpikes();
-        AbilitiesBuilder.Instance.BuildTurretShoot();
+        AbilitiesBuilder.Instance.BuildGunShoot();
     }
 }

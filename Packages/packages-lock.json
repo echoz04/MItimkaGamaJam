@@ -329,6 +329,15 @@
       },
       "url": "https://packages.unity.com"
     },
+    "www.nulltale.asciifx": {
+      "version": "https://github.com/NullTale/AsciiFx.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.render-pipelines.universal": "14.0.6"
+      },
+      "hash": "a6cbf8408f995987c798ba7bd8fbf032b03fe677"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,

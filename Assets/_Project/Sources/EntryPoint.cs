@@ -8,7 +8,5 @@ public class EntryPoint : MonoBehaviour
     private void Start()
     {
         _abilityChoosePanel.Initialize();
-
-        AbilityChoosePanel.Instance.Show();
     }
 }

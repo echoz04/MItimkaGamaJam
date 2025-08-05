@@ -30,6 +30,7 @@ public class AbilitiesBuilder : MonoBehaviour
 
     [Header("FlyingSpikesAbility")]
     [SerializeField] private Transform _spikesParent;
+    [SerializeField] private Spike[] _spikes;
     [SerializeField] private float _rotateSpeed;
     [Space]
 
@@ -52,9 +53,14 @@ public class AbilitiesBuilder : MonoBehaviour
         _invoker.Register(new GunShootAbility(_gunTransform, _shootPoint, _bulletPrefab, _shootCooldown));
     }
 
+    private FlyingSpikesAbility _flyingSpikes;
+
     public void BuildFlyingSpikes()
     {
-        _invoker.Register(new FlyingSpikesAbility(_spikesParent, _rotateSpeed, 0f));
+        if (_flyingSpikes == null)
+            _invoker.Register(_flyingSpikes = new FlyingSpikesAbility(_spikesParent, _spikes, _rotateSpeed, 0f));
+        else
+            _flyingSpikes.Update();
     }
 
     public void BuildExtraGuns()

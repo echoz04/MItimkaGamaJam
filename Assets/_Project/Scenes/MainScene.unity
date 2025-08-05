@@ -195,6 +195,7 @@ Transform:
   - {fileID: 400606730}
   - {fileID: 619394802}
   - {fileID: 651909537}
+  - {fileID: 1364983849}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &327968469
@@ -627,6 +628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 651909537}
   - component: {fileID: 651909536}
+  - component: {fileID: 651909538}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -679,7 +681,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.29407856, g: 0.9245283, b: 0.23985407, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -704,6 +706,71 @@ Transform:
   m_Children: []
   m_Father: {fileID: 186117944}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &651909538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 651909535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29aac9119c044f640bc273764af06838, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BaseColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!1 &1364983848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1364983849}
+  - component: {fileID: 1364983850}
+  m_Layer: 0
+  m_Name: ScenePalleteController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1364983849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364983848}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 186117944}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1364983850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1364983848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554d768cc4a454648bed8962d7bcd2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pallete:
+  - {r: 1, g: 1, b: 1, a: 1}
+  - {r: 1, g: 0.76, b: 0.71, a: 1}
+  - {r: 0.94, g: 0.38, b: 0.36, a: 1}
+  - {r: 0.29, g: 0.21, b: 0.51, a: 1}
+  - {r: 0, g: 0.63, b: 0.62, a: 1}
+  - {r: 1, g: 0.83, b: 0.38, a: 1}
+  - {r: 0.55, g: 0.85, b: 0.29, a: 1}
 --- !u!1 &1424389516
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,8 +781,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1424389517}
   - component: {fileID: 1424389518}
-  - component: {fileID: 1424389520}
-  - component: {fileID: 1424389519}
   m_Layer: 0
   m_Name: GameStatesMachine
   m_TagString: Untagged
@@ -752,30 +817,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 26c8d7b2452f9a646bcee363c040f456, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1424389519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424389516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68922eee9fb4e44499f909ff7769cedd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1424389520
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424389516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 375b5c1199ab2c0489e900f0db5a6b4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1614562928

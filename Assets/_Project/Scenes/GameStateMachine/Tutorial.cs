@@ -15,7 +15,7 @@ public class Tutorial : State
 
     public override void StateFixedUpdate()
     {
-        if (moving_goal_time_left >= 0.0f)
+        if (moving_goal_time_left > 0.0f)
         {
             // TODO track that player moving
             bool isPlayerMoving = true;

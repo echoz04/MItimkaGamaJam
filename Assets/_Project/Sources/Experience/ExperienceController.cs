@@ -11,8 +11,8 @@ public class ExperienceController : MonoBehaviour
     // [SerializeField] private TextMeshProUGUI _display;
     [SerializeField] private Slider _slider;
 
-    private int _currentExperience;
-    private int _currentLevel;
+    [SerializeField] private int _currentExperience;
+    [SerializeField] private int _currentLevel;
 
     private void Awake()
     {
@@ -20,7 +20,8 @@ public class ExperienceController : MonoBehaviour
 
         _currentLevel = 0;
         // _display.text = $"{_currentExperience}/{_levelInfos[_currentLevel].NeedExperienceToNextLevel}";
-        _slider.value = _currentExperience > 0 ? _currentExperience / GetTargetToNextLevelExperience() : 0;
+        _slider.value = _currentExperience;
+        _slider.maxValue = GetTargetToNextLevelExperience();
     }
 
     public void GiveExperience(int value)
@@ -38,7 +39,7 @@ public class ExperienceController : MonoBehaviour
         _currentExperience += value;
 
         // _display.text = $"{_currentExperience}/{_levelInfos[_currentLevel].NeedExperienceToNextLevel}";
-        _slider.value = _currentExperience > 0 ? _currentExperience / GetTargetToNextLevelExperience() : 0;
+        _slider.value = _currentExperience;
 
         if (_currentExperience >= GetTargetToNextLevelExperience())
         {
@@ -48,17 +49,20 @@ public class ExperienceController : MonoBehaviour
 
     private void SetNextLevel()
     {
+        _slider.maxValue = GetTargetToNextLevelExperience();
+
         _currentLevel++;
 
         AbilityChoosePanel.Instance.Show();
 
         _currentExperience = 0;
+        _slider.value = _currentExperience;
     }
 
     public int GetTargetToNextLevelExperience()
     {
-        return Mathf.Max(1, _currentLevel * 20) * (_currentLevel > 2 ? _currentLevel / 2 : 1);
-        // return _levelInfos[_currentLevel].NeedExperienceToNextLevel;
+        return _levelInfos[_currentLevel].NeedExperienceToNextLevel;
+        //return Mathf.Max(1, _currentLevel * 20) * (_currentLevel > 2 ? _currentLevel / 2 : 1);
     }
 }
 

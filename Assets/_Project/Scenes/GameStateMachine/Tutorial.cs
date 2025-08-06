@@ -3,11 +3,17 @@ using System.Collections.Generic;
 
 public class Tutorial : State
 {
+    [SerializeField] private GameObject _tutorialCanvas;
+    [SerializeField] private GameObject _movementTooltip;
+
     float moving_goal_time_left = 0.0f;
 
     public override void StateEnter(Dictionary<string, object> props)
     {
         base.StateEnter(props);
+
+        _tutorialCanvas.SetActive(true);
+        _movementTooltip.SetActive(true);
 
         moving_goal_time_left = 5.0f;
         Debug.Log("Tutorial started!");
@@ -41,6 +47,8 @@ public class Tutorial : State
 
     public override void StateExit()
     {
+        _tutorialCanvas.SetActive(false);
+
         Debug.Log("Tutorial completed!");
     }
 }

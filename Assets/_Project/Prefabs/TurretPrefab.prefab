@@ -102,6 +102,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 3
+  _fireRate: 1
+  _range: 10
+  _bulletPrefab: {fileID: 905059483367139938, guid: 579c727bedf77da0eb8417273e2a7445, type: 3}
+  _firePoint: {fileID: 3378915207919123586}
 --- !u!1 &6928555508292818333
 GameObject:
   m_ObjectHideFlags: 0

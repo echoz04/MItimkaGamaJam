@@ -38,14 +38,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _NoiseScale: 8
+    - _NoiseScale: 21.47
     - _NoiseSpeed: 14
     - _NoiseStrength: 0.15
     - _QueueControl: 0
     - _QueueOffset: 0
     m_Colors:
-    - _BottomColor: {r: 0.088303216, g: 0.12684456, b: 0.4154496, a: 0.39215687}
-    - _TopColor: {r: 0.17897746, g: 0.17765027, b: 0.19571552, a: 0.39607844}
+    - _BottomColor: {r: 0, g: 0, b: 0, a: 0.39215687}
+    - _TopColor: {r: 0.15789276, g: 0.14788584, b: 0.20192331, a: 0.39607844}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &4054962522406103517

@@ -26,7 +26,7 @@ public class Tutorial : State
             // TODO track that player moving
             bool isPlayerMoving = true;
 
-            if (TankRoot.Instance.IsMoving)
+            if (TankRoot.Instance.IsMoving == true)
             {
                 Debug.Log("Is Moving");
 

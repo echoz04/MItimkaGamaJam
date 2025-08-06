@@ -1,4 +1,6 @@
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public sealed class FlyingSpikesAbility : BaseAbility, IUpdateable
 {
@@ -8,7 +10,7 @@ public sealed class FlyingSpikesAbility : BaseAbility, IUpdateable
 
     private int _currenSpikeIndex;
 
-    public FlyingSpikesAbility(Transform spikesParent, Spike[] spikes, float rotateSpeed, float cooldown)
+    public FlyingSpikesAbility(Transform spikesParent, Spike[] spikes, float rotateSpeed)
     {
         _spikesParent = spikesParent;
         _rotateSpeed = rotateSpeed;
@@ -18,8 +20,6 @@ public sealed class FlyingSpikesAbility : BaseAbility, IUpdateable
         _spikesParent.gameObject.SetActive(true);
 
         Update();
-
-        SetCooldown(cooldown);
     }
 
     public override void Execute()
@@ -34,5 +34,10 @@ public sealed class FlyingSpikesAbility : BaseAbility, IUpdateable
             _spikes[_currenSpikeIndex].gameObject.SetActive(true);
             _currenSpikeIndex++;
         }
+    }
+
+    public override void Tick()
+    {
+        Execute();
     }
 }

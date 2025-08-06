@@ -41,6 +41,7 @@ public class Enemy : MonoBehaviour
         {
             AudioPlayer.Instance.PlayEnemyHitSound();
             _hitParticle.Play();
+            CameraShaker.Instance.DoShake();
 
             if (delta > 0)
             {

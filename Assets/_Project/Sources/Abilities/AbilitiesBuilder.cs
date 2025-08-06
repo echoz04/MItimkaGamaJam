@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AbilitiesBuilder : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class AbilitiesBuilder : MonoBehaviour
 
     [SerializeField] private AbilitiesInvoker _invoker;
     [Space]
+
+    [Header("UI Setting")]
+    [SerializeField] private Image _abilityIconPrefab;
+    [SerializeField] private Transform _abilityIconsContent;
 
     [Header("GunShootAbility")]
     [SerializeField] private Transform _gunTransform;
@@ -48,9 +53,16 @@ public class AbilitiesBuilder : MonoBehaviour
         _invoker ??= GetComponent<AbilitiesInvoker>();
     }
 
+    private GunShootAbility _gunShoot;
+
     public void BuildGunShoot()
     {
-        _invoker.Register(new GunShootAbility(_gunTransform, _shootPoint, _bulletPrefab, _shootCooldown));
+        if (_gunShoot == null)
+        {
+            _invoker.Register(_gunShoot = new GunShootAbility(_gunTransform, _shootPoint, _bulletPrefab, _shootCooldown));
+            Image instance = Instantiate(_abilityIconPrefab, _abilityIconsContent);
+            _gunShoot.SetImage(instance);
+        }
     }
 
     private FlyingSpikesAbility _flyingSpikes;
@@ -58,14 +70,21 @@ public class AbilitiesBuilder : MonoBehaviour
     public void BuildFlyingSpikes()
     {
         if (_flyingSpikes == null)
-            _invoker.Register(_flyingSpikes = new FlyingSpikesAbility(_spikesParent, _spikes, _rotateSpeed, 0f));
+            _invoker.Register(_flyingSpikes = new FlyingSpikesAbility(_spikesParent, _spikes, _rotateSpeed));
         else
             _flyingSpikes.Update();
     }
 
+    private ExtraGunsAbility _extrasGuns;
+
     public void BuildExtraGuns()
     {
-        _invoker.Register(new ExtraGunsAbility(_extraGuns, _shotPoints, _bulletPrefab, _extraShootCooldown));
+        if (_extrasGuns == null)
+        {
+            _invoker.Register(_extrasGuns = new ExtraGunsAbility(_extraGuns, _shotPoints, _bulletPrefab, _extraShootCooldown));
+            Image instance = Instantiate(_abilityIconPrefab, _abilityIconsContent);
+            _extrasGuns.SetImage(instance);
+        }
     }
 
     public void BuildCharacterUpgrade()
@@ -73,8 +92,15 @@ public class AbilitiesBuilder : MonoBehaviour
         _invoker.Register(new CharacterUpgradeAbility(TankRoot.Instance));
     }
 
+    private TurretSpawnerAbility _turretSpawner;
+
     public void BuildTurretSpawner()
     {
-        _invoker.Register(new TurretSpawnerAbility(_turretPrefab, TankRoot.Instance, _spawnTurretsCooldown));
+        if (_extrasGuns == null)
+        {
+            _invoker.Register(_turretSpawner = new TurretSpawnerAbility(_turretPrefab, TankRoot.Instance, _spawnTurretsCooldown));
+            Image instance = Instantiate(_abilityIconPrefab, _abilityIconsContent);
+            _turretSpawner.SetImage(instance);
+        }
     }
 }

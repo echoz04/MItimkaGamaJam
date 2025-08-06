@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class StateMachine : MonoBehaviour
 {
-    private State state;
+    public State state;
     public Dictionary<string, State> States;
 
     public static Dictionary<string, object> empty_dict = new Dictionary<string, object>() { };

@@ -24,6 +24,9 @@ public class Waves : State
 
         ((TankRoot)(TankRoot.Instance)).OnDestroyed += () =>
         {
+            if (stateMachine.state != this)
+                return;
+            
             ChangeState(stateMachine.States["Defeat"], StateMachine.empty_dict);
         };
 

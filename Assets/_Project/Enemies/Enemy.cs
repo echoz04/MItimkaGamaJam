@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private int _giveExperience;
     [SerializeField] private ParticleSystem _hitParticle;
     [SerializeField] private ParticleSystem _deadParticle;
 
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
         healthComponent.OnHealthChanged += (delta) =>
         {
             AudioPlayer.Instance.PlayEnemyHitSound();
+            ExperienceController.Insntance.GiveExperience(_giveExperience);
             _hitParticle.Play();
 
             if (delta > 0)

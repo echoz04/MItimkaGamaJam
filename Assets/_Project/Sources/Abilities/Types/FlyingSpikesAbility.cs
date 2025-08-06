@@ -15,9 +15,9 @@ public sealed class FlyingSpikesAbility : BaseAbility, IUpdateable
         _spikes = spikes;
         _currenSpikeIndex = 0;
 
-        Update();
-
         _spikesParent.gameObject.SetActive(true);
+
+        Update();
 
         SetCooldown(cooldown);
     }

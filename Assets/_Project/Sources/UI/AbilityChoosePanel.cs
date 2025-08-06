@@ -31,6 +31,8 @@ public class AbilityChoosePanel : MonoBehaviour
 
     public void Show()
     {
+        Time.timeScale = 0;
+
         gameObject.SetActive(true);
 
         _currentAbilitiesInfo = _abilitiesInfo
@@ -49,6 +51,8 @@ public class AbilityChoosePanel : MonoBehaviour
         _currentAbilitiesInfo[index].BuildAction?.Invoke();
 
         gameObject.SetActive(false);
+
+        Time.timeScale = 1;
     }
 }
 

@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 177c1fde91d3def4a82c0ce580c6bf4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _giveExperience: 35
   _hitParticle: {fileID: 384518443365049855}
   _deadParticle: {fileID: 4891786865103520933}
   MovementSpeed: 10

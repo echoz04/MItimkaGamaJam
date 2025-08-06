@@ -31,6 +31,7 @@ public class Enemy : MonoBehaviour
         healthComponent.OnHealthEnded += () =>
         {
             AudioPlayer.Instance.PlayEnemyDeadSound();
+            ScoreCounter.Instance.Add(5, transform);
             _deadParticle.Play();
             OnDestroyed?.Invoke();
             isDestroyed = true;

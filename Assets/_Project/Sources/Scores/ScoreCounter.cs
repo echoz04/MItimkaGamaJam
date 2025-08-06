@@ -7,6 +7,7 @@ public class ScoreCounter : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _text;
     [SerializeField] private Animator _animator;
+    [SerializeField] private Transform _worldCanvas;
     [SerializeField] private ScorePopup _popupPrefab;
 
     private int _score;
@@ -26,7 +27,7 @@ public class ScoreCounter : MonoBehaviour
         _text.text = _score.ToString();
         _animator.enabled = true;
 
-        var popup = Instantiate(_popupPrefab, spawnPosition.position, Quaternion.identity);
+        var popup = Instantiate(_popupPrefab, spawnPosition.position, Quaternion.identity, _worldCanvas);
 
         popup.Initialize(score);
     }

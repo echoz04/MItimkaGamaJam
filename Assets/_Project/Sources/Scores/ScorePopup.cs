@@ -4,15 +4,15 @@ using UnityEngine;
 public class ScorePopup : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _text;
-    [SerializeField] private float _moveDistance = 1f;
-    [SerializeField] private float _duration = 1f;
+    [SerializeField] private float _moveDistance = 2f;
+    [SerializeField] private float _duration = 2f;
 
     private Vector3 _startPosition;
     private Vector3 _endPosition;
 
     public void Initialize(int score)
     {
-        _text.text = score.ToString();
+        _text.text = "+" + score.ToString();
 
         _startPosition = transform.position;
         _endPosition = _startPosition + Vector3.up * _moveDistance;

@@ -21,6 +21,16 @@ public class Waves : State
         base.StateEnter(props);
         Debug.Log("Waves started!");
         enemiesController = EnemiesController.Instance;
+
+        ((TankRoot)(TankRoot.Instance)).OnDestroyed += () =>
+        {
+            ChangeState(stateMachine.States["Defeat"], StateMachine.empty_dict);
+        };
+
+        // foreach (var enemy in GetComponentsInChildren<Enemy>())
+        // {
+        //     Destroy(enemy.gameObject);
+        // }
     }
 
 

@@ -8,6 +8,8 @@ public class Tutorial : State
 
     float moving_goal_time_left = 0.0f;
 
+    public static bool IsTutorialCompleted = false;
+
     public override void StateEnter(Dictionary<string, object> props)
     {
         base.StateEnter(props);
@@ -17,6 +19,11 @@ public class Tutorial : State
 
         moving_goal_time_left = 5.0f;
         Debug.Log("Tutorial started!");
+
+        if (IsTutorialCompleted)
+        {
+            ChangeState(stateMachine.States["Waves"], StateMachine.empty_dict);
+        }
     }
 
     public override void StateFixedUpdate()
@@ -24,7 +31,7 @@ public class Tutorial : State
         if (moving_goal_time_left > 0.0f)
         {
             // TODO track that player moving
-            bool isPlayerMoving = true;
+            bool isPlayerMoving = true;//(TankRoot)(TankRoot.Instance);
 
             if (TankRoot.Instance.IsMoving == true)
             {
@@ -48,6 +55,7 @@ public class Tutorial : State
     public override void StateExit()
     {
         _tutorialCanvas.SetActive(false);
+        IsTutorialCompleted = true;
 
         Debug.Log("Tutorial completed!");
     }

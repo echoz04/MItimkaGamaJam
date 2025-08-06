@@ -32,6 +32,8 @@ public class TankRoot : MonoBehaviour, ICharacter
     private Action<InputAction.CallbackContext> _onRotatePerformed;
     private Action<InputAction.CallbackContext> _onRotateCanceled;
 
+    public event Action OnDestroyed;
+
     private void Awake()
     {
         Instance = this;
@@ -60,7 +62,7 @@ public class TankRoot : MonoBehaviour, ICharacter
 
         healthComponent.OnHealthEnded += () =>
         {
-            // OnDestroyed?.Invoke();
+            OnDestroyed?.Invoke();
             // isDestroyed = true;
             Debug.Log("Tank destroyed");
             Destroy(this);

@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour
         healthComponent.OnHealthChanged += (delta) =>
         {
             AudioPlayer.Instance.PlayEnemyHitSound();
-            ExperienceController.Insntance.GiveExperience(_giveExperience);
             _hitParticle.Play();
 
             if (delta > 0)

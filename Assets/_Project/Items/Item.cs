@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
         float distanceToPickUpper = Vector2.Distance(PickUpperTransform.position, selfTransform.position);
         if (distanceToPickUpper <= PickUpDistance)
         {
-            selfTransform.position = Vector2.Lerp(selfTransform.position, PickUpperTransform.position, Time.deltaTime);
+            selfTransform.position = Vector2.Lerp(selfTransform.position, PickUpperTransform.position, Time.deltaTime * 3.0f);
 
             if (distanceToPickUpper < applyDistanceThreshold)
             {
@@ -32,6 +32,6 @@ public class Item : MonoBehaviour
 
     public virtual void Apply()
     {
-        Destroy(this);
+        Destroy(gameObject);
     }
 }

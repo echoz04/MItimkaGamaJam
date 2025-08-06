@@ -1,8 +1,10 @@
+using System;
 using UnityEngine;
 
 public class HurtBoxComponent : MonoBehaviour
 {
     public AttackData DamageAttackData;
+    public event Action<Collider2D> OnHurted;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -11,6 +13,7 @@ public class HurtBoxComponent : MonoBehaviour
         {
             Debug.Log("Hurted");
             hitbox.Damage(DamageAttackData);
+            OnHurted?.Invoke(collider);
         }
     }
 }

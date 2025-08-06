@@ -8,6 +8,11 @@ public class Bullet : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(Kill), _lifeTime);
+        GetComponent<HurtBoxComponent>().OnHurted += (collider) =>
+        {
+            Kill();
+            Debug.Log("Killed");
+        };
     }
 
     private void Update()

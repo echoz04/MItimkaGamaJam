@@ -37,7 +37,7 @@ public class ExperienceItem : Item
 
     public override void Apply()
     {
-        // TODO add experience to player
+        ExperienceController.Insntance.GiveExperience((int)experienceCount[Tier]);
         base.Apply();
     }
 };

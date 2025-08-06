@@ -3,6 +3,10 @@ using UnityEngine;
 public class SpriteColorComponent : MonoBehaviour
 {
     public Color BaseColor;
+
+    public float MaxHue = 1.0f;
+    public float MinHue = 0.0f;
+
     SpriteRenderer spriteRenderer;
 
     float h, s, v;
@@ -26,7 +30,8 @@ public class SpriteColorComponent : MonoBehaviour
 
     private void ChangeColor()
     {
+        float currentHue = Mathf.Clamp(Mathf.Repeat(h + ScenePalleteController.ShiftHue, 1.0f), MinHue, MaxHue);
         if (spriteRenderer != null)
-            spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.HSVToRGB(Mathf.Repeat(h + ScenePalleteController.ShiftHue, 1.0f), s, v), Time.deltaTime);
+            spriteRenderer.color = Color.Lerp(spriteRenderer.color, Color.HSVToRGB(currentHue, s, v), Time.deltaTime);
     }
 }

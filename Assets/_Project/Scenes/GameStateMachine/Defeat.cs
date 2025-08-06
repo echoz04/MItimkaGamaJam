@@ -18,7 +18,7 @@ public class Defeat : State
     {
         Debug.Log("Player defeated!");
         RestartInterface.gameObject.SetActive(true);
-        RestartInterface.SetText("Press any key to respawn");
+        RestartInterface.SetText("Press any key to restart");
 
         timeToShowRespawn = 1.5f;
     }

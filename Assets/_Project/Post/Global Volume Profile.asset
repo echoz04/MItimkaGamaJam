@@ -281,7 +281,7 @@ MonoBehaviour:
     m_Value: 0
   m_Palette:
     m_OverrideState: 1
-    m_Value: {fileID: 2800000, guid: 3045b7912cad82747afeef8668e99505, type: 3}
+    m_Value: {fileID: 2800000, guid: 88c2436a0e30957489aad0b3106a5323, type: 3}
   m_Impact:
     m_OverrideState: 1
     m_Value: 1

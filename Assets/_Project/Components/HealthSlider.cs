@@ -19,7 +19,12 @@ public class HealthSlider : MonoBehaviour
     // Update is called once per frame
     public void UpdateSlider()
     {
-        slider.value = healthComponent.Health / healthComponent.MaxHealth;
-        slider.gameObject.SetActive(slider.value != 1.0);
+        slider.maxValue = healthComponent.MaxHealth;
+        slider.value = healthComponent.Health;
+
+        slider.gameObject.SetActive(slider.value != healthComponent.MaxHealth);
+
+        //slider.value = healthComponent.Health / healthComponent.MaxHealth;
+        //slider.gameObject.SetActive(slider.value != 1.0f);
     }
 }

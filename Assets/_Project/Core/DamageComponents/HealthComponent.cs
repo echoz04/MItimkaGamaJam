@@ -8,7 +8,7 @@ public class HealthComponent : MonoBehaviour
 
     public event Action<float> OnHealthChanged;
     public event Action OnHealthEnded;
-    
+
 
     void Start()
     {

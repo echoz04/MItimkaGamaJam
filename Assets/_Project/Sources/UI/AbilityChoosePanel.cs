@@ -19,11 +19,10 @@ public class AbilityChoosePanel : MonoBehaviour
 
         _abilitiesInfo = new List<AbilityInfo>()
         {
-            new AbilityInfo { Title = "Летающие шипы", BuildAction = AbilitiesBuilder.Instance.BuildFlyingSpikes },
-            new AbilityInfo { Title = "Двойная пушка", BuildAction = AbilitiesBuilder.Instance.BuildExtraGuns },
-            new AbilityInfo { Title = "Улучшение параметров", BuildAction = AbilitiesBuilder.Instance.BuildCharacterUpgrade },
-            new AbilityInfo { Title = "Пушка", BuildAction = AbilitiesBuilder.Instance.BuildGunShoot },
-            new AbilityInfo { Title = "Туррелы", BuildAction = AbilitiesBuilder.Instance.BuildTurretSpawner },
+            new AbilityInfo { Title = "Flying Spikes", BuildAction = AbilitiesBuilder.Instance.BuildFlyingSpikes },
+            new AbilityInfo { Title = "Extra Guns", BuildAction = AbilitiesBuilder.Instance.BuildExtraGuns },
+            new AbilityInfo { Title = "Upgrade Stats", BuildAction = AbilitiesBuilder.Instance.BuildCharacterUpgrade },
+            new AbilityInfo { Title = "Turrets", BuildAction = AbilitiesBuilder.Instance.BuildTurretSpawner },
         };
 
         gameObject.SetActive(false);

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,9 @@ public class ExperienceController : MonoBehaviour
 
     public void GiveExperience(int value)
     {
+        if (((TankRoot)(TankRoot.Instance)).IsDestroyed)
+            return;
+
         Debug.Log($"OnGiveExperience _levelInfos.Count is {_levelInfos.Count} and _currentLevel is {_currentLevel}");
 
         if (_levelInfos.Count < _currentLevel)

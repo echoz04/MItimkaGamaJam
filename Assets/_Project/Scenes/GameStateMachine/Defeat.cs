@@ -20,6 +20,9 @@ public class Defeat : State
         RestartInterface.gameObject.SetActive(true);
         RestartInterface.SetText("Press any key to restart");
 
+        MaxScoreDisplayer.Instance.SetMaxScore(ScoreCounter.Instance.GetScore());
+        MaxScoreDisplayer.Instance.Display();
+
         timeToShowRespawn = 1.5f;
     }
 

@@ -34,11 +34,11 @@ public class TankRoot : MonoBehaviour, ICharacter
 
     public event Action OnDestroyed;
 
+    public bool IsDestroyed = false;
+
     private void Awake()
     {
         Instance = this;
-
-        MaxScoreDisplayer.Instance.Display();
 
         _input = new TankInput();
         _input.Enable();
@@ -60,14 +60,16 @@ public class TankRoot : MonoBehaviour, ICharacter
 
     private void Start()
     {
+        // MaxScoreDisplayer.Instance.Display();
+
         healthComponent = Transform.GetComponent<HealthComponent>();
 
         healthComponent.OnHealthEnded += () =>
         {
             OnDestroyed?.Invoke();
-            // isDestroyed = true;
+            IsDestroyed = true;
             Debug.Log("Tank destroyed");
-            Destroy(this);
+            // Destroy(this);
         };
 
         healthComponent.OnHealthChanged += (delta) =>
@@ -91,6 +93,11 @@ public class TankRoot : MonoBehaviour, ICharacter
 
     private void Update()
     {
+        if (IsDestroyed)
+        {
+            return;
+        }
+
         UpdateMovementInput();
         Move();
         Rotate();

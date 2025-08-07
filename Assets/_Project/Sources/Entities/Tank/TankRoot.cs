@@ -38,6 +38,8 @@ public class TankRoot : MonoBehaviour, ICharacter
     {
         Instance = this;
 
+        MaxScoreDisplayer.Instance.Display();
+
         _input = new TankInput();
         _input.Enable();
 
@@ -70,6 +72,8 @@ public class TankRoot : MonoBehaviour, ICharacter
 
         healthComponent.OnHealthChanged += (delta) =>
         {
+            MaxScoreDisplayer.Instance.SetMaxScore(ScoreCounter.Instance.GetScore());
+
             if (delta > 0)
             {
 

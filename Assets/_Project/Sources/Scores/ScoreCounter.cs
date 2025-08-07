@@ -32,5 +32,7 @@ public class ScoreCounter : MonoBehaviour
         popup.Initialize(score);
     }
 
+    public int GetScore() => _score;
+
     public void DisableAnimator() => _animator.enabled = false;
 }
